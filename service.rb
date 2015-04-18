@@ -1,5 +1,8 @@
 require 'sinatra'
+require 'sinatra/json'
 
-get '/' do
-  'Hello world!'
+set :server, 'thin'
+
+get '/' do	
+	json :key1 => 'this is json'
 end
