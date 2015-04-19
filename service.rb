@@ -4,5 +4,5 @@ require 'sinatra/json'
 set :server, 'thin'
 
 get '/' do	
-	json :key1 => 'this is json'
+	json :compliment => 'a compliment', :missing_words => []
 end
