@@ -1,6 +1,7 @@
 require 'rack/test'
 require 'minitest/spec'
 require 'minitest/autorun'
+
 require_relative '../service'
 
 class ServiceTest < Minitest::Test
@@ -10,24 +11,24 @@ class ServiceTest < Minitest::Test
 		Sinatra::Application
 	end
 
-	def test_when_requesting_a_compliment_returns_a_200
+	def test_when_requesting_a_compliment_it_should_return_a_200
 		get '/'
 		assert_equal 200, last_response.status
 	end
-
-	def test_when_requesting_a_compliment_returns_a_proper_JSON_response
+	
+	def test_when_requesting_a_compliment_it_should_return_a_proper_JSON_response
 		get '/'
 		assert_includes last_response.content_type, 'application/json'
 	end
 
-	def test_when_requesting_a_compliment_returns_json_with_compliment
+	def test_when_requesting_a_compliment_it_should_return_json_with_compliment
 		get '/'
 		json = JSON.parse(last_response.body)
 		assert_kind_of Hash, json
 		assert json.fetch('compliment')
 	end
 
-	def test_when_requesting_a_compliment_returns_json_with_missing_words
+	def test_when_requesting_a_compliment_it_should_return_json_with_missing_words
 		get '/'
 		json = JSON.parse(last_response.body)
 		assert_kind_of Hash, json
