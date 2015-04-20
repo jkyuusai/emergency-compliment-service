@@ -22,9 +22,9 @@ end
 def get_missing_words(string)
 	missing_words = []
 	words = get_dictionary
-	normalize(string).split.each do |word|
-		next if word.length == 0
-		missing_words.push(word)
+	normalize(string).split.each do |word, index|
+		next if word.length == 0 || words.key?(word) || words.key?(word.downcase)
+		missing_words.push(word)		
 	end
 	return missing_words	
 end
@@ -36,9 +36,9 @@ def get_dictionary
 	    words[normalize(line)] = true
 	  end
 	end
-	return words;
+	return words
 end
 
 def normalize(word)
-	word.strip.gsub(/\.\.\./,' ').tr('/',' ').tr('".,+=!','')
+	word.strip.gsub(/\.\.\./,' ').gsub(/(?=[\s\S])-(?<=[\s\S])/,'').tr('/',' ').tr('".,+=!','')
 end

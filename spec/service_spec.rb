@@ -40,12 +40,37 @@ class ServiceTest < Minitest::Test
 		assert(words)
 	end
 
-	def test_after_a_string_is_passed_through_normalize_should_have_ellipses_replaced_with_a_space
+	def test_get_missing_words_returns_an_array
+		compliment = "Strangers all wannar sit next to you on the bus."
+		missing_words = get_missing_words(compliment)
+		
+		assert_kind_of Array, missing_words
+	end
+
+	def test_get_missing_words_should_return_any_words_not_found_in_the_dictionary
+		compliment = "Strangers all wannar sit next to you on the bus."
+		missing_words = get_missing_words(compliment)
+
+		assert_equal(missing_words, ["wannar"])
+	end
+
+	def test_get_missing_words_should_check_if_word_exists_in_lowercase_form_if_capitalized_form_is_not_found_in_dictionary
+		compliment = "There Is no bluh reason to Panic."
+		missing_words = get_missing_words(compliment)
+
+		assert_equal(missing_words, ["bluh"])
+	end
+
+	def test_after_a_string_is_passed_through_normalize_it_should_have_ellipses_replaced_with_a_space
 		assert_equal " except Gary", normalize("...except Gary")
 	end
 
-	def test_after_a_string_is_passed_through_normalize_should_have_forward_slash_replaced_with_a_space
+	def test_after_a_string_is_passed_through_normalize_it_should_have_forward_slash_replaced_with_a_space
 		assert_equal "and or", normalize("and/or")
+	end
+
+	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_dashes_that_are_not_part_of_hyphenated_words
+		assert_equal "kiwi", normalize("kiwi- ")
 	end
 
 	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_any_double_quotes
