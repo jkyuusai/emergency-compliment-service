@@ -40,5 +40,13 @@ def get_dictionary
 end
 
 def normalize(word)
-	word.strip.gsub(/\.\.\./,' ').gsub(/(?=[\s\S])-(?<=[\s\S])/,'').tr('/',' ').tr('".,+=!','')
+	word
+	.strip
+	.gsub(/\.\.\./,' ')
+	.gsub(/(?=[\s\S])-(?<=[\s\S])/,'')
+	.gsub(/\S*\d\S*/,'')
+	.gsub(/\d/,'')
+	.tr('/',' ')
+	.tr('".,+=!','')
+	.strip
 end

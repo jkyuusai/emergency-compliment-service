@@ -62,7 +62,7 @@ class ServiceTest < Minitest::Test
 	end
 
 	def test_after_a_string_is_passed_through_normalize_it_should_have_ellipses_replaced_with_a_space
-		assert_equal " except Gary", normalize("...except Gary")
+		assert_equal "except Gary", normalize("...except Gary")
 	end
 
 	def test_after_a_string_is_passed_through_normalize_it_should_have_forward_slash_replaced_with_a_space
@@ -79,7 +79,7 @@ class ServiceTest < Minitest::Test
 
 	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_any_periods
 		assert_equal "Dr", normalize("Dr.")
-	end	
+	end
 
 	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_any_commas
 		assert_equal "say what", normalize("say, what")
@@ -95,7 +95,15 @@ class ServiceTest < Minitest::Test
 
 	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_any_exclamation_points
 		assert_equal "approve", normalize("approve!")
-	end	
+	end
+
+	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_any_numbers
+		assert_equal "pigs", normalize("3 pigs")
+	end
+
+	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_any_ordinals
+		assert_equal "place", normalize("3rd place")
+	end
 end
 
 # If everything is working
