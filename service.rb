@@ -16,5 +16,29 @@ end
 def get_compliment
 	visit 'http://emergencycompliment.com/'
 	compliment = find('.compliment').text
-	{:compliment => compliment, :missing_words => []}
+	{:compliment => compliment, :missing_words => get_missing_words(compliment)}
+end
+
+def get_missing_words(string)
+	missing_words = []
+	words = get_dictionary
+	normalize(string).split.each do |word|
+		next if word.length == 0
+		missing_words.push(word)
+	end
+	return missing_words	
+end
+
+def get_dictionary
+	words = {}
+	File.open('./american-english') do |fp|
+	  fp.each do |line|
+	    words[normalize(line)] = true
+	  end
+	end
+	return words;
+end
+
+def normalize(word)
+	word.strip.gsub(/\.\.\./,' ').tr('/',' ').tr('".,+=!','')
 end
