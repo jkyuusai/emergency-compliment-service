@@ -54,7 +54,7 @@ class ServiceTest < Minitest::Test
 		assert_equal(missing_words, ["wannar"])
 	end
 
-	def test_get_missing_words_should_check_if_word_exists_in_lowercase_form_if_capitalized_form_is_not_found_in_dictionary
+	def test_get_missing_words_should_check_if_word_exists_in_uncapitalized_form_if_capitalized_form_is_not_found_in_dictionary
 		compliment = "There Is no bluh reason to Panic."
 		missing_words = get_missing_words(compliment)
 
