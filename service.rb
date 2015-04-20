@@ -22,9 +22,10 @@ end
 def get_missing_words(string)
 	missing_words = []
 	words = get_dictionary
-	normalize(string).split.each do |word, index|
-		next if word.length == 0 || words.key?(word) || words.key?(word.downcase)
-		missing_words.push(word)		
+	string.split.each do |word|
+		wd = normalize(word)
+		next if wd.length == 0 || words.key?(wd) || words.key?(wd.downcase)
+		missing_words.push(wd)		
 	end
 	return missing_words	
 end
@@ -40,7 +41,7 @@ def get_dictionary
 end
 
 def normalize(word)
-	word
+	(" " + word + " ")
 	.gsub(/\.{2,}/,' ')
 	.gsub(/(?=[\s\S])-\s/,'')
 	.gsub(/\s-(?=[\s\S])/,'')

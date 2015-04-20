@@ -62,6 +62,13 @@ class ServiceTest < Minitest::Test
 		assert_equal(missing_words, ["bluh"])
 	end
 
+	def test_get_missing_words_should_handle_spaces_correctly
+		compliment = "You remind everyone of bluh kiwis- delicious and surprisingly fuzzy."
+		missing_words = get_missing_words(compliment)
+
+		assert_equal(missing_words, ["bluh"])
+	end	
+
 	def test_after_a_string_is_passed_through_normalize_it_should_have_ellipses_replaced_with_a_space
 		assert_equal "except Gary", normalize("...except Gary")
 	end
@@ -71,6 +78,7 @@ class ServiceTest < Minitest::Test
 	end
 
 	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_dashes_that_are_not_part_of_hyphenated_words
+		assert_equal "kiwis", normalize(" kiwis- ") 
 		assert_equal "kiwi", normalize("kiwi- ")
 		assert_equal "kiwi", normalize(" -kiwi")
 	end
