@@ -81,7 +81,7 @@ class ServiceTest < Minitest::Test
 		compliment = "You want the best for everyone...except Gary."
 		missing_words = get_missing_words(compliment)
 		assert_equal(missing_words, [])
-	end	
+	end
 
 	def test_after_a_string_is_passed_through_normalize_it_should_have_ellipses_replaced_with_a_space
 		assert_equal "except Gary", normalize("...except Gary")
@@ -133,20 +133,3 @@ class ServiceTest < Minitest::Test
 		assert_equal "place", normalize("3rd place")
 	end
 end
-
-# If everything is working
-	# Should return a 200 response
-
-	# Should return a json object that looks like this:
-	# {
-	# 	compliment: '',
-	# 	missing_words: ['foo', 'bar', 'spork']
-	# }
-
-# If emergencycompliment is not available
-	# Should return a 404 response
-
-	# Should return a json object that looks like this:
-	# {
-	# 	message: 'emergencycompliment is unavailable'
-	# }

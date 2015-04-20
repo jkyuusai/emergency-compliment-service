@@ -25,23 +25,23 @@ def get_missing_words(string)
 	string.split(/[\s\/\.{2,}]/).each do |word|
 		wd = normalize(word)
 		next if wd.length == 0 || words.key?(wd) || words.key?(wd.downcase)
-		missing_words.push(wd)		
+		missing_words.push(wd)
 	end
-	return missing_words	
+	return missing_words
 end
 
 def get_dictionary
 	words = {}
 	File.open('./american-english') do |fp|
-	  fp.each do |line|
-	    words[normalize(line)] = true
-	  end
+		fp.each do |line|
+			words[normalize(line)] = true
+		end
 	end
 	return words
 end
 
 def normalize(word)
-	(" " + word + " ")	
+	(" " + word + " ")
 	.gsub(/(?=[\s\S])-\s/,'')
 	.gsub(/\s-(?=[\s\S])/,'')
 	.gsub(/\S*\d\S*/,'')
