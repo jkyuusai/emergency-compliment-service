@@ -41,9 +41,9 @@ end
 
 def normalize(word)
 	word
-	.strip
-	.gsub(/\.\.\./,' ')
-	.gsub(/(?=[\s\S])-(?<=[\s\S])/,'')
+	.gsub(/\.{2,}/,' ')
+	.gsub(/(?=[\s\S])-\s/,'')
+	.gsub(/\s-(?=[\s\S])/,'')
 	.gsub(/\S*\d\S*/,'')
 	.gsub(/\d/,'')
 	.tr('/',' ')

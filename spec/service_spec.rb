@@ -71,6 +71,11 @@ class ServiceTest < Minitest::Test
 
 	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_dashes_that_are_not_part_of_hyphenated_words
 		assert_equal "kiwi", normalize("kiwi- ")
+		assert_equal "kiwi", normalize(" -kiwi")
+	end
+
+	def test_after_a_string_is_passed_through_normalize_it_should_keep_hyphenated_words
+		assert_equal "seat-belt", normalize("seat-belt")
 	end
 
 	def test_after_a_string_is_passed_through_normalize_it_should_not_contain_any_double_quotes
