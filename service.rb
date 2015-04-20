@@ -22,7 +22,7 @@ end
 def get_missing_words(string)
 	missing_words = []
 	words = get_dictionary
-	string.split.each do |word|
+	string.split(/[\s\/\.{2,}]/).each do |word|
 		wd = normalize(word)
 		next if wd.length == 0 || words.key?(wd) || words.key?(wd.downcase)
 		missing_words.push(wd)		
@@ -41,8 +41,7 @@ def get_dictionary
 end
 
 def normalize(word)
-	(" " + word + " ")
-	.gsub(/\.{2,}/,' ')
+	(" " + word + " ")	
 	.gsub(/(?=[\s\S])-\s/,'')
 	.gsub(/\s-(?=[\s\S])/,'')
 	.gsub(/\S*\d\S*/,'')

@@ -35,6 +35,13 @@ class ServiceTest < Minitest::Test
 		assert json.fetch('missing_words')
 	end
 
+	def test_compliment_string_weird_quotes_should_not_break
+		compliment = "If Einstein could meet you, he'd be \"mildly to moderately\" intimidated."
+		missing_words = get_missing_words(compliment)
+
+		assert_equal(missing_words, [])
+	end
+
 	def test_get_dictionary_should_return_a_hash_of_words
 		words = get_dictionary
 		assert_kind_of Hash, words
@@ -65,8 +72,15 @@ class ServiceTest < Minitest::Test
 	def test_get_missing_words_should_handle_spaces_correctly
 		compliment = "You remind everyone of bluh kiwis- delicious and surprisingly fuzzy."
 		missing_words = get_missing_words(compliment)
-
 		assert_equal(missing_words, ["bluh"])
+
+		compliment = "At least two friends are going to name their child and/or goldfish after you."
+		missing_words = get_missing_words(compliment)
+		assert_equal(missing_words, [])
+
+		compliment = "You want the best for everyone...except Gary."
+		missing_words = get_missing_words(compliment)
+		assert_equal(missing_words, [])
 	end	
 
 	def test_after_a_string_is_passed_through_normalize_it_should_have_ellipses_replaced_with_a_space
