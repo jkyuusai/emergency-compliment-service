@@ -1,6 +1,6 @@
 # emergency-compliment-service
 
-Small Sinatra app that scrapes a compliment from www.emergencycompliment.com using PhantomJS/Capybara and returns it and any words that don't appear in its included dictionary (the standard wamerican dictionary found in Debian based distros)
+Small Sinatra app that scrapes a compliment from www.emergencycompliment.com using PhantomJS/Capybara and returns a JSON response that includes the compliment and any words from the compliment that don't appear in its included dictionary (the standard wamerican dictionary found in Debian based distros)
 
 Try it out at: https://emergency-compliment-service.herokuapp.com/
 
@@ -16,7 +16,7 @@ Result:
   ]
 }`
 
-##Rules applied to missing words:
+##Rules applied to missing words
 - Capitalized words from compliment match capitalized or uncapitalized words in dictionary (to account for capitalization at start of sentences)
 - Uncapitalized words from compliment do not match capitalized words in dictionary (to prevent improper use of proper nouns)
 - Possessive/non-possessive forms from compliment are considered different words
@@ -34,7 +34,7 @@ Result:
 - Capybara
 - Heroku Buildpacks
 
-##Didn't wind up using but dealt with a decent bit:
+##Didn't wind up using but dealt with a decent bit
 - Mechanize
 - RSpec
 - RestClient
